@@ -33,6 +33,9 @@ public class Proposta {
     @Embedded
     private Endereco endereco;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     //Constructors
 
     /**
@@ -53,5 +56,17 @@ public class Proposta {
 
     public Long getId() {
        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setStatus(Status status) {
+       this.status = status;
     }
 }
