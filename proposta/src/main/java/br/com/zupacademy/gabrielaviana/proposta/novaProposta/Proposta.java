@@ -60,6 +60,13 @@ public class Proposta {
         this.endereco = endereco;
     }
 
+    public Proposta(String email, String nome, BigDecimal salario, String documento, EnderecoRequest endereco) {
+    }
+
+    public Proposta(Proposta proposta) {
+       this.id = getId();
+    }
+
     //Getters
     public Long getId() {
        return id;
