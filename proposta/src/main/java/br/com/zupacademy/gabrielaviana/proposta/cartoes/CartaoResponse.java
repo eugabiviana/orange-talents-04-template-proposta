@@ -1,27 +1,28 @@
 package br.com.zupacademy.gabrielaviana.proposta.cartoes;
 
+import br.com.zupacademy.gabrielaviana.proposta.novaProposta.Proposta;
+import br.com.zupacademy.gabrielaviana.proposta.novaProposta.PropostaRepository;
+
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
 public class CartaoResponse {
 
-    private Long id;
+    private String id;
     private String titular;
-    private LocalDateTime emitidoEm;
     private Integer limite;
-    private String idProposta;
+    private Long idProposta;
 
     //Constructor
-    public CartaoResponse(Long id, String titular, LocalDateTime emitidoEm, Integer limite, String idProposta) {
+    public CartaoResponse(String id, String titular, Integer limite, Long idProposta) {
         this.id = id;
         this.titular = titular;
-        this.emitidoEm = emitidoEm;
         this.limite = limite;
         this.idProposta = idProposta;
     }
 
     //Getters
-    public Long getId() {
+    public String getNumeroCartao() {
         return id;
     }
 
@@ -29,27 +30,17 @@ public class CartaoResponse {
         return titular;
     }
 
-    public LocalDateTime getEmitidoEm() {
-        return emitidoEm;
-    }
-
     public Integer getLimite() {
         return limite;
     }
 
-    public String getIdProposta() {
+    public Long getIdProposta() {
         return idProposta;
     }
 
-    //toString
-    @Override
-    public String toString() {
-        return "CartaoResponse{" +
-                "id=" + id +
-                ", titular='" + titular + '\'' +
-                ", emitidoEm=" + emitidoEm +
-                ", limite=" + limite +
-                ", idProposta='" + idProposta + '\'' +
-                '}';
+
+    public Cartao paraCartao(PropostaRepository propostaRepository) {
+        Proposta proposta = propostaRepository.findById(idProposta).get();
+        return new Cartao (this.id, this.titular, this.limite, proposta);
     }
 }

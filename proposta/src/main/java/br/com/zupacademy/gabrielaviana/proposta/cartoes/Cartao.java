@@ -14,14 +14,15 @@ public class Cartao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    private String numeroCartao;
     @NotNull
-    private LocalDateTime emitidoEm;
+    private LocalDateTime emitidoEm = LocalDateTime.now();
     @NotBlank
     private String titular;
     @NotNull
     private Integer limite;
 
-    @NotNull @OneToOne @JoinColumn(name="proposta")
+    @NotNull @OneToOne(mappedBy = "cartao")
     private Proposta proposta;
 
     //Constructors
@@ -33,9 +34,8 @@ public class Cartao {
 
     }
 
-    public Cartao(Long id, LocalDateTime emitidoEm, String titular, Integer limite, Proposta proposta) {
-        Id = id;
-        this.emitidoEm = emitidoEm;
+    public Cartao(String numeroCartao, String titular, Integer limite, Proposta proposta) {
+        this.numeroCartao = numeroCartao;
         this.titular = titular;
         this.limite = limite;
         this.proposta = proposta;

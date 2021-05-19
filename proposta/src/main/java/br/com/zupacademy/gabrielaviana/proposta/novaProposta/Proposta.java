@@ -1,5 +1,7 @@
 package br.com.zupacademy.gabrielaviana.proposta.novaProposta;
 
+import br.com.zupacademy.gabrielaviana.proposta.cartoes.Cartao;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -36,7 +38,11 @@ public class Proposta {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    //Constructors
+    @OneToOne
+    private Cartao cartao;
+
+
+//Constructors
 
     /**
      * @deprecated apenas para o uso do hibernate
@@ -54,6 +60,7 @@ public class Proposta {
         this.endereco = endereco;
     }
 
+    //Getters
     public Long getId() {
        return id;
     }
@@ -68,5 +75,13 @@ public class Proposta {
 
     public void setStatus(Status status) {
        this.status = status;
+    }
+
+    public Cartao getCartao() { return cartao; }
+
+    //Setter
+
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
 }
