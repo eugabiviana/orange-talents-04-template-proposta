@@ -134,6 +134,30 @@ services:
       VAULT_TOKEN: ee413645-dbe8-4848-afc6-6bb2768ada75
       VAULT_ADDR: http://127.0.0.1:8200
 
+  mysqldb:
+    image: 'mysql:5.7'
+    network_mode: bridge
+    ports:
+      - 3309:3306
+    environment:
+      - MYSQL_DATABASE=propostas
+      - MYSQL_ROOT_PASSWORD=medusa25
+
+  propostas:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: eugabiviana/propostas
+    restart: on-failure
+    container_name: propostas
+    network_mode: bridge
+    ports:
+      - "8081:8080"
+    depends_on:
+      - analise
+      - contas
+      - mysqldb
+
 volumes:
   grafana-volume:
   prometheus-volume:
