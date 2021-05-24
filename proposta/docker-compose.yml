@@ -141,7 +141,15 @@ services:
       - 3309:3306
     environment:
       - MYSQL_DATABASE=propostas
+      - MYSQL_USER=root
       - MYSQL_ROOT_PASSWORD=medusa25
+      - MYSQL_ROOT_PASSAWORD=medusa25
+    networks:
+      - spring-boot-mysql-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
 
   propostas:
     build:
@@ -150,13 +158,17 @@ services:
     image: eugabiviana/propostas
     restart: on-failure
     container_name: propostas
-    network_mode: bridge
     ports:
       - "8081:8080"
     depends_on:
-      - analise
-      - contas
-      - mysqldb
+      mysqldb:
+        condition: service_healthy
+      networks:
+        - spring-boot-mysql-network
+
+networks:
+  spring-boot-mysql-network:
+    driver: bridge
 
 volumes:
   grafana-volume:
