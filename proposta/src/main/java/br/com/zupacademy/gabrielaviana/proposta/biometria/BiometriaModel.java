@@ -15,8 +15,8 @@ public class BiometriaModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private String fingerPrint;
+    @NotNull @Lob
+    private byte[] fingerPrint;
 
     @NotNull
     @ManyToOne
@@ -37,7 +37,7 @@ public class BiometriaModel {
 
     }
 
-    public BiometriaModel(String fingerPrint, Cartao cartao) {
+    public BiometriaModel(@NotNull byte[] fingerPrint, Cartao cartao) {
         this.fingerPrint = fingerPrint;
         this.cartao = cartao;
     }
@@ -47,9 +47,7 @@ public class BiometriaModel {
         return id;
     }
 
-    public String getFingerPrint() {
-        return fingerPrint;
-    }
+    public byte[] getFingerPrint() { return fingerPrint; }
 
     public Cartao getCartao() {
         return cartao;

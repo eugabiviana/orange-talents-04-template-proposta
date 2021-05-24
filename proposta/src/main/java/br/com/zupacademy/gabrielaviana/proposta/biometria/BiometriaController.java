@@ -3,6 +3,7 @@ package br.com.zupacademy.gabrielaviana.proposta.biometria;
 import br.com.zupacademy.gabrielaviana.proposta.cartoes.Cartao;
 import br.com.zupacademy.gabrielaviana.proposta.cartoes.CartaoRepository;
 import br.com.zupacademy.gabrielaviana.proposta.compartilhado.ExecutorTransacao;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,13 @@ public class BiometriaController {
 
     @PostMapping("/{id}")
     @Transactional
-    public ResponseEntity<?> salvarBiometria(@PathVariable("id") String id,
+    public ResponseEntity<?> salvarBiometria(@PathVariable("id") Long id,
                                              @RequestBody @Valid BiometriaRequest request,
                                              UriComponentsBuilder uriBuilder){
+        if(!Base64.isBase64(request.getFingerPrint())){
+            return ResponseEntity.badRequest().build();
+        }
+
         Optional<Cartao> cartao = cartaoRepository.findById(id);
         if(!cartao.isPresent()){
             logger.warn("Cartão não identificado!");

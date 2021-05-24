@@ -1,0 +1,4 @@
+FROM postgres
+ENV POSTGRES_USER root
+ENV POSTGRES_PASSWORD medusa25
+ENV POSTGRES_DB propostas

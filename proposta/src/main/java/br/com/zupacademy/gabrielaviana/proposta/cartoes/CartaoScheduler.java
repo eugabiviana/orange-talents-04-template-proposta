@@ -21,7 +21,7 @@ public class CartaoScheduler {
     @Autowired
     private CartaoClientFeign cartaoClientFeign;
 
-    @Scheduled(fixedDelay = 60 * 1000)
+    @Scheduled(fixedDelay = 10 * 1000)
     public void associaCartaoAProposta(){
 
         //buscar todas as propostas sem cartao

@@ -13,7 +13,7 @@ public class Cartao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String numeroCartao;
     @NotNull
     private LocalDateTime emitidoEm = LocalDateTime.now();
@@ -44,7 +44,7 @@ public class Cartao {
     //Getters
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public LocalDateTime getEmitidoEm() {

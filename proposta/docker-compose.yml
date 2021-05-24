@@ -139,35 +139,43 @@ services:
     ports:
       - 3309:3306
     environment:
-      - MYSQL_DATABASE=propostas
-      - MYSQL_USER=root
-      - MYSQL_ROOT_PASSWORD=medusa25
-      - MYSQL_ROOT_PASSAWORD=medusa25
-    networks:
-      - spring-boot-mysql-network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 10
+      MYSQL_ROOT_PASSWORD: medusa25
+      MYSQL_DATABASE: propostas
 
-  propostas:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    image: eugabiviana/propostas
-    restart: on-failure
-    container_name: propostas
-    ports:
-      - "8081:8080"
-    depends_on:
-      mysqldb:
-        condition: service_healthy
-    networks:
-      - spring-boot-mysql-network
+#  mysqldb:
+#    image: 'mysql:5.7'
+#    ports:
+#      - 3309:3306
+#    environment:
+#      - MYSQL_DATABASE=propostas
+#      - MYSQL_USER=root
+#      - MYSQL_ROOT_PASSWORD=medusa25
+#      - MYSQL_ROOT_PASSAWORD=medusa25
+#    networks:
+#      - spring-boot-mysql-network
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+#      timeout: 10s
+#      retries: 10
 
-networks:
-  spring-boot-mysql-network:
-    driver: bridge
+#  propostas:
+#    build:
+#      dockerfile: Dockerfile
+#      context: .
+#    image: eugabiviana/propostas
+#    restart: on-failure
+#    container_name: propostas
+#    ports:
+#      - "8081:8080"
+#    depends_on:
+#      mysqldb:
+#        condition: service_healthy
+#    networks:
+#      - spring-boot-mysql-network
+
+#networks:
+#  spring-boot-mysql-network:
+#    driver: bridge
 
 volumes:
   grafana-volume:
