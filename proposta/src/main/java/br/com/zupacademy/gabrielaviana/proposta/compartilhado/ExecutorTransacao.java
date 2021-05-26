@@ -1,5 +1,6 @@
 package br.com.zupacademy.gabrielaviana.proposta.compartilhado;
 
+import br.com.zupacademy.gabrielaviana.proposta.cartoes.Cartao;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -16,5 +17,10 @@ public class ExecutorTransacao {
     public <T> T salvaEComita(T objeto){
         manager.persist(objeto);
         return objeto;
+    }
+
+    @Transactional
+    public <T> T atualizaEComita(T objeto) {
+        return manager.merge(objeto);
     }
 }

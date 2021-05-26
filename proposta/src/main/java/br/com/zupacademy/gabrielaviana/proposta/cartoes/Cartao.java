@@ -1,5 +1,6 @@
 package br.com.zupacademy.gabrielaviana.proposta.cartoes;
 
+import br.com.zupacademy.gabrielaviana.proposta.bloqueio.BloqueioModel;
 import br.com.zupacademy.gabrielaviana.proposta.novaProposta.Proposta;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ public class Cartao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String numeroCartao;
     @NotNull
     private LocalDateTime emitidoEm = LocalDateTime.now();
@@ -24,6 +25,13 @@ public class Cartao {
 
     @NotNull @OneToOne(mappedBy = "cartao")
     private Proposta proposta;
+
+    @Enumerated(value = EnumType.STRING)
+    private StatusCartao status = StatusCartao.ATIVO;
+
+    @OneToOne(mappedBy = "cartaoBloqueado", cascade = CascadeType.MERGE)
+    private BloqueioModel bloqueio;
+
 
     //Constructors
     /**
@@ -41,10 +49,23 @@ public class Cartao {
         this.proposta = proposta;
     }
 
-    //Getters
+    public boolean verificaBloqueado() {
+        return this.status.equals(StatusCartao.BLOQUEADO);
+    }
 
-    public Long getId() {
+    public void setBloqueio(BloqueioModel bloqueio) {
+        this.bloqueio = bloqueio;
+        this.status = StatusCartao.BLOQUEADO;
+
+    }
+
+    //Getters
+    public String getId() {
         return id;
+    }
+
+    public String getNumeroCartao() {
+        return numeroCartao;
     }
 
     public LocalDateTime getEmitidoEm() {
@@ -61,5 +82,13 @@ public class Cartao {
 
     public Proposta getProposta() {
         return proposta;
+    }
+
+    public StatusCartao getStatus() {
+        return status;
+    }
+
+    public BloqueioModel getBloqueio() {
+        return bloqueio;
     }
 }
