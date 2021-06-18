@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-public class BloqueioModel {
+public class Bloqueio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +28,10 @@ public class BloqueioModel {
      * @deprecated para uso do framework
      */
     @Deprecated
-    public BloqueioModel(){
+    public Bloqueio(){
 
     }
-    public BloqueioModel(Long id, LocalDateTime dataBloqueio, String ipBloqueio, String userAgent, Cartao cartaoBloqueado) {
+    public Bloqueio(Long id, LocalDateTime dataBloqueio, String ipBloqueio, String userAgent, Cartao cartaoBloqueado) {
         this.id = id;
         this.dataBloqueio = dataBloqueio;
         this.ipBloqueio = ipBloqueio;
@@ -39,8 +39,8 @@ public class BloqueioModel {
         this.cartaoBloqueado = cartaoBloqueado;
     }
 
-    public BloqueioModel(@NotBlank String ipCliente,
-                         @NotBlank String userAgent, Cartao cartao) {
+    public Bloqueio(@NotBlank String ipCliente,
+                    @NotBlank String userAgent, Cartao cartao) {
 
         this.ipBloqueio = ipBloqueio;
         this.userAgent = userAgent;

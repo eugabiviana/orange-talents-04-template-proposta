@@ -1,12 +1,14 @@
 package br.com.zupacademy.gabrielaviana.proposta.cartoes;
 
-import br.com.zupacademy.gabrielaviana.proposta.bloqueio.BloqueioModel;
+import br.com.zupacademy.gabrielaviana.proposta.bloqueio.Bloqueio;
 import br.com.zupacademy.gabrielaviana.proposta.novaProposta.Proposta;
+import br.com.zupacademy.gabrielaviana.proposta.viagem.AvisoViagem;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name="cartao")
@@ -30,7 +32,10 @@ public class Cartao {
     private StatusCartao status = StatusCartao.ATIVO;
 
     @OneToOne(mappedBy = "cartaoBloqueado", cascade = CascadeType.MERGE)
-    private BloqueioModel bloqueio;
+    private Bloqueio bloqueio;
+
+    @OneToMany(mappedBy = "cartao", cascade = CascadeType.MERGE)
+    private Set<AvisoViagem> viagens;
 
 
     //Constructors
@@ -53,7 +58,7 @@ public class Cartao {
         return this.status.equals(StatusCartao.BLOQUEADO);
     }
 
-    public void setBloqueio(BloqueioModel bloqueio) {
+    public void setBloqueio(Bloqueio bloqueio) {
         this.bloqueio = bloqueio;
         this.status = StatusCartao.BLOQUEADO;
 
@@ -88,7 +93,12 @@ public class Cartao {
         return status;
     }
 
-    public BloqueioModel getBloqueio() {
+    public Bloqueio getBloqueio() {
         return bloqueio;
+    }
+
+    public void setViagem(AvisoViagem viagem) {
+        this.viagens.add(viagem);
+        this.status = StatusCartao.EM_VIAGEM;
     }
 }

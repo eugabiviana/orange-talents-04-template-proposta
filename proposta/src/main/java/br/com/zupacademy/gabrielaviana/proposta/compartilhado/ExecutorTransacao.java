@@ -1,6 +1,5 @@
 package br.com.zupacademy.gabrielaviana.proposta.compartilhado;
 
-import br.com.zupacademy.gabrielaviana.proposta.cartoes.Cartao;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
