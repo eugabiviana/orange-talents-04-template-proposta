@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/orange-talents-04-template-proposta.iml" filepath="$PROJECT_DIR$/.idea/orange-talents-04-template-proposta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proposta/proposta.iml" filepath="$PROJECT_DIR$/proposta/proposta.iml" />
     </modules>
   </component>
 </project>
