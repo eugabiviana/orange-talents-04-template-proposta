@@ -42,9 +42,11 @@ public class AvisoViagemController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cartão não encontrado");
         }
 
-//Notificando o sistema bancário - Viagem - notificando o sistema legado
-        //obs: API Especifica para o sistema bancario:
-        //http://localhost:8888/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
+/*
+ * Notificando o sistema bancário - Viagem - notificando o sistema legado
+ * Obs: API Especifica para o sistema bancario:
+ * http://localhost:8888/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
+ */
         try {
             AvisoViagem novoAvisoViagem = request.toModel(cartao.get(), servletRequest.getLocalAddr(),
                     servletRequest.getHeader("User-Agent"));
@@ -58,5 +60,4 @@ public class AvisoViagemController {
         }
         return ResponseEntity.ok().build();
     }
-
 }
