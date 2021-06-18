@@ -18,7 +18,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/viagem")
+@RequestMapping("/viagens")
 public class AvisoViagemController {
 
     @Autowired
